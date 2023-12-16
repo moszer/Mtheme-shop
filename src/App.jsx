@@ -43,7 +43,7 @@ function App() {
       <Navbar />
 
       <div>
-          {isBrowser && <p>Current browser: {browserName}</p>}
+          {<p>Current browser: {browserName}</p>}
       </div>
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box">
