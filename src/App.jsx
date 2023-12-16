@@ -15,6 +15,8 @@ import State from './State.js'
 import Lottie from "lottie-react";
 import catLoaing from '/src/assets/Animation - 1702732952547.json'
 
+import { BrowserView, MobileView, isBrowser, isMobile, browserName } from 'react-device-detect';
+
 function App() {
 
   const [isLoading, setisLoading]= useRecoilState(State)
@@ -39,6 +41,10 @@ function App() {
   return (
     <>
       <Navbar />
+
+      <div>
+          {isBrowser && <p>Current browser: {browserName}</p>}
+      </div>
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box">
             <form method="dialog">
