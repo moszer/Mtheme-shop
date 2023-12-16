@@ -14,6 +14,7 @@ import State from './State.js'
 
 import Lottie from "lottie-react";
 import catLoaing from '/src/assets/Animation - 1702732952547.json'
+import Sorry_warnning from '/src/assets/Warnning - 1702748099772.json'
 
 import { BrowserView, MobileView, isBrowser, isMobile, browserName } from 'react-device-detect';
 
@@ -64,7 +65,8 @@ function App() {
           <form method="dialog">
           </form>
           <div className=''>
-            <h3 className="font-bold text-lg">[SUPPORT] Warnning!</h3>
+            <Lottie animationData={Sorry_warnning} loop={true} className='w-30'/>
+            <h3 className="font-bold text-lg flex justify-center">[SUPPORT] Warnning!</h3>
             <p className="py-4 flex justify-center">MTHEM ไม่ลองรับบราวเซอร์ {browserName} โปรดเปิดใน safari chrome brave หรือบราวเซอร์อื่น</p>
           </div>
           <div className='flex justify-center'>
