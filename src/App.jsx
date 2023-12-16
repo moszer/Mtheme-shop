@@ -38,10 +38,20 @@ function App() {
     }
   },[isLoading])
 
+      
+  const openDefaultBrowser = () => {
+    window.open('https://mtheme-shop.vercel.app/', '_blank');
+  };
+
+  useState(() => {
+    if(browserName === "Line" || browserName === "Facebook"){
+      openDefaultBrowser()
+    }
+  }, [])
+
   return (
     <>
       <Navbar />
-
       <div>
           {<p>Current browser: {browserName}</p>}
       </div>
