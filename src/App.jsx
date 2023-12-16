@@ -59,7 +59,7 @@ function App() {
   return (
     <>
       <Navbar />
-
+      {browserName}
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <form method="dialog">
