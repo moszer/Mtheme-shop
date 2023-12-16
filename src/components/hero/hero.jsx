@@ -17,7 +17,7 @@ function Hero() {
   };
 
   return (
-    <div className="hero min-h-screen bg-white relative overflow-hidden">
+    <div className="hero min-h-screen bg-base-200 relative overflow-hidden">
       <div
         className="absolute top-0 left-0 w-full h-full"
         style={{
@@ -27,10 +27,10 @@ function Hero() {
         <Lottie animationData={BackGround} loop={true}/>
       </div>
 
-      <div className="hero-content flex-col lg:flex-row relative z-10">
+      <div className="hero-content flex-col lg:flex-row relative">
         <img
-          src="https://i.imgur.com/mNk87pP.jpg"
-          className="max-w-sm rounded-lg shadow-2xl"
+          src="https://i.imgur.com/Q2HEKmc.png"
+          className="max-w-sm rounded-lg shadow-2xl rounded-3xl"
           style={{ width: '270px', height: 'auto' }} // Set the desired width and maintain the aspect ratio
           onLoad={handleLoad}
         />

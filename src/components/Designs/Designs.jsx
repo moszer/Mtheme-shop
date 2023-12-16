@@ -230,9 +230,13 @@ function Designs() {
       <Uploadimgur imgData={fileImg} />
 
       <Navbar />
-        <div className='pt-5 pb-40'>
+        <div className='pt-5 pb-40 bg-base-200'>
           <div className='flex justify-center'>DESIGNS</div>
-          <Widget item={Widget_data} />
+          
+          <div className='flex pb-10 pt-5 justify-center'>
+            <Widget item={Widget_data} className='rounded-3xl w-full' />
+          </div>
+
           <div className='flex gap-4 justify-center'>
 
                 <button className="btn w-25 bg-gray-300">

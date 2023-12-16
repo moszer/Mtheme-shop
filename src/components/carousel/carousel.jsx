@@ -21,10 +21,10 @@ function Carousel() {
 
   return (
     <div className='flex justify-center'>
-      <div className="carousel carousel-center rounded-box pb-4 pt-4 bg-white">
+      <div className="carousel carousel-center pb-4 pt-4 bg-base-200">
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/mNk87pP.jpg"
+                src="https://i.imgur.com/Q2HEKmc.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 1"
@@ -33,7 +33,7 @@ function Carousel() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/YiF23wL.jpg"
+                src="https://i.imgur.com/gEGDf3R.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 2"
@@ -42,7 +42,7 @@ function Carousel() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/S2MOdHF.jpg"
+                src="https://i.imgur.com/bdW0F09.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 3"
@@ -51,7 +51,7 @@ function Carousel() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/NGQmxPm.jpg"
+                src="https://i.imgur.com/fSoQk3m.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 4"
@@ -60,7 +60,7 @@ function Carousel() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/jzin2Ow.jpg"
+                src="https://i.imgur.com/zY69prE.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 5"
@@ -69,7 +69,7 @@ function Carousel() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.imgur.com/JBxvLw7.jpg"
+                src="https://i.imgur.com/WXth2zr.png"
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 6"

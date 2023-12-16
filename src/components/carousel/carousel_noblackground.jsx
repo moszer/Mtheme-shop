@@ -17,10 +17,10 @@ function CarouselNoblackground() {
   }, [currentSlide]);
 
   const image = [
-    "https://i.imgur.com/IZF1wib.jpg",
-    "https://i.imgur.com/Ab3IUfS.jpg",
-    "https://i.imgur.com/raobTyQ.png",
-    "https://i.imgur.com/cCBWTOT.jpg",
+    "https://i.imgur.com/kJ0VOPl.png",
+    "https://i.imgur.com/0MU4JO7.png",
+    "https://i.imgur.com/w9MxFac.png",
+    "https://i.imgur.com/aga9op2.png",
     "https://i.imgur.com/fNiLtCL.png",
     "https://i.imgur.com/PzR6blL.png"
   ];

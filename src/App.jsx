@@ -58,7 +58,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <Navbar />
 
       
@@ -91,11 +91,11 @@ function App() {
       </dialog>
       <Hero />
       <Stats />
-      <div className='text-3xl font-bold flex items-center justify-center bg-white'>Getting You Start</div>
+      <div className='text-3xl font-bold flex items-center justify-center bg-base-200'>Getting You Start</div>
       <Carousel />
       <Card />
-      <Navigation />
-    </>
+        <Navigation />
+    </div>
   )
 }
 

@@ -27,6 +27,7 @@ function Widget({ item }) {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: widgetStyles.imageHave ? 'transparent' : widgetStyles.widgetColorBg,
+    borderRadius: '1rem'
   };
 
   const navHeaderStyle = {
@@ -39,8 +40,8 @@ function Widget({ item }) {
   };
 
   return (
-    <div className="h-60 flex items-center justify-center bg-white">
-      <div className="h-44 w-70 rounded-3xl bg-blue-500 text-white flex items-center justify-center widget-bg" style={widgetBgStyle}>
+    <div className="flex items-center justify-center bg-white rounded-3xl">
+      <div className="h-44 bg-blue-500 text-white flex items-center justify-center widget-bg" style={widgetBgStyle}>
         <div className="row">
           <div className="rounded-lg h-8 m-2 mt-0 flex items-center nav-bg" style={navHeaderStyle}>
             <div className="ml-2">Schedule</div>
