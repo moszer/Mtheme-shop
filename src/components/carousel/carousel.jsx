@@ -1,17 +1,24 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import State from '../../State';
+
 const carouselItemStyle = {
   margin: '0 10px', // Adjust the margin as needed
   width: '150px', 
   height: '300px' 
 };
 
-const containerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-
 function Carousel() {
+
+  const [isLoading, setIsLoading] = useRecoilState(State)
+
+  const handleLoad = () => {
+    setIsLoading({
+      ...isLoading,
+      loadingState: isLoading.loadingState + 1
+    });
+  };
+
   return (
     <div className='flex justify-center'>
       <div className="carousel carousel-center rounded-box pb-4 pt-4 bg-white">
@@ -21,6 +28,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 1"
+                onLoad={handleLoad}
               />
             </div>
             <div className="carousel-item">
@@ -29,6 +37,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 2"
+                onLoad={handleLoad}
               />
             </div>
             <div className="carousel-item">
@@ -37,6 +46,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 3"
+                onLoad={handleLoad}
               />
             </div>
             <div className="carousel-item">
@@ -45,6 +55,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 4"
+                onLoad={handleLoad}
               />
             </div>
             <div className="carousel-item">
@@ -53,6 +64,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 5"
+                onLoad={handleLoad}
               />
             </div>
             <div className="carousel-item">
@@ -61,6 +73,7 @@ function Carousel() {
                 className="rounded-box"
                 style={carouselItemStyle}
                 alt="Image 6"
+                onLoad={handleLoad}
               />
             </div>
           </div>

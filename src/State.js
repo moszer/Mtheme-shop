@@ -3,7 +3,8 @@ import { atom } from 'recoil'
 const State = atom({
     key: "state_",
     default: {
-        uploadState: false
+        uploadState: false,
+        loadingState: 0
     }
 })
 

@@ -9,10 +9,10 @@ import { HexColorPicker } from "react-colorful";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from '../navigation/Navigation'
-
+import convertToscriptable from '../../convertToscriptable'
 
 //asset
-const widget_data = [
+const My_theme = [
   {
     img: "https://i.ibb.co/Z18LLCF/Purple-Scary-Halloween-Nightmare-Zoom-Virtual-Background.png",
     nav_color_text: "#FFFFF",
@@ -44,12 +44,28 @@ const widget_data = [
       widget_color_bg: "blue-200",
       Nav_color_bg: "#FFFFFF",
       Image_have: true,
+    },
+    {
+      img: "https://i.ibb.co/BP80RYG/image.jpg",
+      nav_color_text: "#000000",
+      data_color_text: "#FFFFFF",
+      widget_color_bg: "#000000",
+      Nav_color_bg: "#FFFFFF",
+      Image_have: false,
+    },
+    {
+      img: "https://i.ibb.co/BP80RYG/image.jpg",
+      nav_color_text: "#FFFFFF",
+      data_color_text: "#000000",
+      widget_color_bg: "#FFFFFF",
+      Nav_color_bg: "#000000",
+      Image_have: false,
     }
 ];
 
+
 function Designs() {
-
-
+  
   const [fileImg, setfileImg] = useState(null)
   const [Widget_data, setWidget_data]= useRecoilState(widgetData)
   const State_ = useRecoilValue(State)
@@ -82,7 +98,7 @@ function Designs() {
   const [Button_edit, setButton_edit] = useState(false)
   const [Save_button, setSave_button] = useState(true)
 
-
+  //text desings
   const Top_t_desings = () => {
     setTop_t_select(false) 
     setButton_edit(true) 
@@ -172,10 +188,41 @@ function Designs() {
     }
   }, [State_.uploadState]);
 
-
+  //sava to localstorage
+  useEffect(() => {
+    window.localStorage.setItem("DataWidget", JSON.stringify(Widget_data));
+  },[Widget_data])
+  
   const exportWidget = () => {
-    console.log(Widget_data)
+    let ObjectWidget = window.localStorage.getItem("DataWidget");
+    console.log(ObjectWidget)
+    convertToscriptable()
   }
+
+
+  const [myTheme, setmyTheme] = useState(null)
+  useEffect(() => {
+    if(myTheme !== null){
+      setWidget_data({
+        ...My_theme[myTheme],
+      })
+    }
+  }, [myTheme])
+
+  const successText = ["🎃 HolloWeen 🎃", "🧀 Cheese 🧀", "☁️ Cloud ☁️", "❄️ Snow ❄️", "⚫ Black ⚫", "⚪ white ⚪"]
+  const handleThemeChange = (themeIndex) => {
+    setmyTheme(themeIndex)
+    toast(`${successText[themeIndex]}` , {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  };
 
   return (
     <>
@@ -278,9 +325,50 @@ function Designs() {
                 </dialog>
 
 
-                <button className="btn w-25 bg-gray-300">
-                    My Theme
+                {/* bg editer color */}
+                <button className="btn w-25 bg-gray-300" onClick={()=>document.getElementById('my_modal_7').showModal()}>
+                  My Theme
                 </button>
+                <dialog id="my_modal_7" className="modal modal-bottom sm:modal-bottom">
+                  
+                    <div className="modal-box">
+                      <div className=''>
+                        <div className='flex justify-center pb-5'>
+                            <p>My Theme</p>
+                        </div>
+
+                        <div >
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-purple-500 w-full" onClick={() => handleThemeChange(0)}>🎃 HalloWeen 🎃</button>
+                          </div>
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-yellow-300 w-full" onClick={() => handleThemeChange(1)}>🧀 Cheese 🧀</button>
+                          </div>
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-blue-200 w-full" onClick={() => handleThemeChange(2)}>☁️ Cloud ☁️</button>
+                          </div>
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-blue-300 w-full" onClick={() => handleThemeChange(3)}>❄️ Snow ❄️</button>
+                          </div>
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-gray-600 w-full" onClick={() => handleThemeChange(4)}>⚫ Black ⚫</button>
+                          </div>
+                          <div className='flex justify-center pb-2'>
+                            <button className="btn bg-gray-300 w-full" onClick={() => handleThemeChange(5)}>⚪ white ⚪</button>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    <div className="modal-action flex justify-center">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn w-screen bg-gray-200">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+
             </div>
             <div className='flex justify-center pt-5'>
               <button className="btn btn-primary" onClick={exportWidget}>Export to scriptable</button>

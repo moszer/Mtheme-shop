@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typewriter from 'typewriter-effect';
 import "/src/App.css"
-
+import { useRecoilState } from 'recoil';
+import State from '../../State';
 
 function Hero() {
+  const [isLoading, setIsLoading] = useRecoilState(State)
+  const handleLoad = () => {
+    setIsLoading({
+      ...isLoading,
+      loadingState: isLoading.loadingState + 1
+    });
+  };
+
   return (
     <div className="hero min-h-screen bg-white">
       <div className="hero-content flex-col lg:flex-row">
@@ -11,6 +20,7 @@ function Hero() {
           src="https://i.imgur.com/mNk87pP.jpg"
           className="max-w-sm rounded-lg shadow-2xl"
           style={{ width: '270px', height: 'auto' }} // Set the desired width and maintain the aspect ratio
+          onLoad={handleLoad}
         />
         <div>
           <h1 className="text-4xl my-font">
