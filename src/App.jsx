@@ -38,24 +38,43 @@ function App() {
     }
   },[isLoading])
 
-      
-  const openDefaultBrowser = () => {
-    window.open('https://mtheme-shop.vercel.app/', '_blank');
-  };
 
-  useState(() => {
-    if(browserName === "Line" || browserName === "Facebook"){
-      openDefaultBrowser()
-    }
-  }, [])
+  useEffect(() => {
+    const checkExternal = () => {
+      if (browserName === "Line" || browserName === "Facebook") {
+        document.getElementById('my_modal_2').showModal()
+        //close show load 
+        document.getElementById('my_modal_3').close()
+      }
+    };
+
+    checkExternal()
+  }, []);
+
+  const openExternal = () => {
+    const WindownUrl = window.location.href
+    window.open(`${WindownUrl}/?openExternalBrowser=1`);
+  }
 
   return (
     <>
       <Navbar />
-      <div>
-          {<p>Current browser: {browserName}</p>}
-      </div>
-        <dialog id="my_modal_3" className="modal">
+
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+          </form>
+          <div className=''>
+            <h3 className="font-bold text-lg">[SUPPORT] Warnning!</h3>
+            <p className="py-4 flex justify-center">MTHEM ไม่ลองรับบราวเซอร์ {browserName} โปรดเปิดใน safari chrome brave หรือบราวเซอร์อื่น</p>
+          </div>
+          <div className='flex justify-center'>
+            <button className='btn' onClick={openExternal}>เปิดบราวเซอร์อื่น</button>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog id="my_modal_3" className="modal">
           <div className="modal-box">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
