@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     const checkExternal = () => {
-      if (browserName === "Line" || browserName === "Facebook") {
+      if (browserName === "Line" || browserName === "Facebook" || browserName === "Instagram") {
         document.getElementById('my_modal_2').showModal()
         //close show load 
         document.getElementById('my_modal_3').close()
@@ -59,7 +59,6 @@ function App() {
   return (
     <>
       <Navbar />
-      {browserName}
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <form method="dialog">
