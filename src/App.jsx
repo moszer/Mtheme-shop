@@ -16,7 +16,7 @@ import Lottie from "lottie-react";
 import catLoaing from '/src/assets/Animation - 1702732952547.json'
 import Sorry_warnning from '/src/assets/Warnning - 1702748099772.json'
 
-import { BrowserView, MobileView, isBrowser, isMobile, browserName } from 'react-device-detect';
+import { browserName } from 'react-device-detect';
 
 function App() {
 
@@ -54,12 +54,14 @@ function App() {
 
   const openExternal = () => {
     const WindownUrl = window.location.href
-    window.open(`${WindownUrl}/?openExternalBrowser=1`);
+    window.open(`${WindownUrl}?openExternalBrowser=1`);
   }
 
   return (
     <>
       <Navbar />
+
+      
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <form method="dialog">

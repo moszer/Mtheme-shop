@@ -4,6 +4,9 @@ import "/src/App.css"
 import { useRecoilState } from 'recoil';
 import State from '../../State';
 
+import BackGround from '/src/assets/BackGround.json'
+import Lottie from "lottie-react";
+
 function Hero() {
   const [isLoading, setIsLoading] = useRecoilState(State)
   const handleLoad = () => {
@@ -14,8 +17,17 @@ function Hero() {
   };
 
   return (
-    <div className="hero min-h-screen bg-white">
-      <div className="hero-content flex-col lg:flex-row">
+    <div className="hero min-h-screen bg-white relative overflow-hidden">
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          zIndex: 0,
+        }}
+      >
+        <Lottie animationData={BackGround} loop={true}/>
+      </div>
+
+      <div className="hero-content flex-col lg:flex-row relative z-10">
         <img
           src="https://i.imgur.com/mNk87pP.jpg"
           className="max-w-sm rounded-lg shadow-2xl"
