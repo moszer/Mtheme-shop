@@ -21,7 +21,7 @@ function Carousel() {
 
   return (
     <div className='flex justify-center'>
-      <div className="carousel carousel-center pb-4 pt-4 bg-base-200">
+      <div className="carousel carousel-center pb-4 pt-4 bg-base-200 gap-2">
             <div className="carousel-item">
               <img
                 src="https://i.imgur.com/Q2HEKmc.png"

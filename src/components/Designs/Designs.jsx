@@ -230,15 +230,16 @@ function Designs() {
       <Uploadimgur imgData={fileImg} />
 
       <Navbar />
-        <div className='pt-5 pb-40 bg-base-200'>
+        <div className='pt-5 pb-40 bg-base-200 h-screen'>
           <div className='flex justify-center'>DESIGNS</div>
           
           <div className='flex pb-10 pt-5 justify-center'>
             <Widget item={Widget_data} className='rounded-3xl w-full' />
           </div>
 
-          <div className='flex gap-4 justify-center'>
 
+          {/* image editer*/}
+          <div className='flex gap-4 justify-center'>
                 <button className="btn w-25 bg-gray-300">
                   {/* The label element is used to associate the button with the hidden file input */}
                   <label htmlFor="fileInput" style={{ cursor: 'pointer' }}>
@@ -248,13 +249,17 @@ function Designs() {
                       onChange={handleFileChange}
                       style={{ display: 'none' }}
                     />
-                    <img src="https://i.imgur.com/3402kkK.png" alt="" className="w-10" />
+                   <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"/>
+                  </svg>
                   </label>
                 </button>
 
                 {/* text editer color */}
                 <button className="btn w-25 bg-gray-300" onClick={()=>document.getElementById('my_modal_5').showModal()}>
-                  <img src="https://i.imgur.com/hcyDYw4.png" alt="" className='w-10'/>
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 2V1h10v1M6 1v12m-2 0h4m3-6V6h6v1m-3-1v7m-1 0h2"/>
+                </svg>  
                 </button>
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-bottom">
                   
@@ -292,7 +297,11 @@ function Designs() {
 
                 {/* bg editer color */}
                 <button className="btn w-25 bg-gray-300" onClick={()=>document.getElementById('my_modal_6').showModal()}>
-                  <img src="https://i.imgur.com/k77KhMp.png" alt="" className='w-10'/>
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="m1.56 6.245 8 3.924a1 1 0 0 0 .88 0l8-3.924a1 1 0 0 0 0-1.8l-8-3.925a1 1 0 0 0-.88 0l-8 3.925a1 1 0 0 0 0 1.8Z"/>
+                  <path d="M18 8.376a1 1 0 0 0-1 1v.163l-7 3.434-7-3.434v-.163a1 1 0 0 0-2 0v.786a1 1 0 0 0 .56.9l8 3.925a1 1 0 0 0 .88 0l8-3.925a1 1 0 0 0 .56-.9v-.786a1 1 0 0 0-1-1Z"/>
+                  <path d="M17.993 13.191a1 1 0 0 0-1 1v.163l-7 3.435-7-3.435v-.163a1 1 0 1 0-2 0v.787a1 1 0 0 0 .56.9l8 3.925a1 1 0 0 0 .88 0l8-3.925a1 1 0 0 0 .56-.9v-.787a1 1 0 0 0-1-1Z"/>
+                </svg>
                 </button>
                 <dialog id="my_modal_6" className="modal modal-bottom sm:modal-bottom">
                   

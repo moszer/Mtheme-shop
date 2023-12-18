@@ -12,6 +12,5 @@ const widgetData = atom({
   }, // default value (aka initial value)
 });
 
-
-
 export default widgetData
+

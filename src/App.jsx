@@ -2,26 +2,20 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './components/header/navbar.jsx'
 import Hero from './components/hero/hero.jsx'
 import Carousel from './components/carousel/carousel.jsx'
-import Countdown from './components/countdown/countdown.jsx'
 import Card from './components/card/card.jsx'
-import Drawner from './components/drawner/drawner.jsx'
-import Modal from './components/modal/modal.jsx'
 import Stats from './components/stats/stats.jsx'
 import Navigation from './components/navigation/Navigation.jsx'
-
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import State from './State.js'
-
 import Lottie from "lottie-react";
 import catLoaing from '/src/assets/Animation - 1702732952547.json'
 import Sorry_warnning from '/src/assets/Warnning - 1702748099772.json'
-
 import { browserName } from 'react-device-detect';
+import { checkToken } from './Controller.js'
 
 function App() {
 
   const [isLoading, setisLoading]= useRecoilState(State)
-
 
   useEffect(() => {
     document.getElementById('my_modal_3').showModal()
@@ -52,16 +46,16 @@ function App() {
     checkExternal()
   }, []);
 
+  //open external support line
   const openExternal = () => {
     const WindownUrl = window.location.href
     window.open(`${WindownUrl}?openExternalBrowser=1`);
   }
 
+
   return (
     <div>
       <Navbar />
-
-      
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <form method="dialog">

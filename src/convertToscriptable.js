@@ -108,7 +108,7 @@ export default function convertToscriptable() {
             //handleData_.push("NODATA")
             } else {
             const value = days_[key]
-            handleData_.push("${Key_value}")
+            handleData_.push(${Key_value})
             }
         }
     }
@@ -229,7 +229,7 @@ export default function convertToscriptable() {
     for (const item of handleData_) {
         const dataField = widget.addStack();
         const randomNumber = Math.floor(Math.random() * lenemoji);
-        const Data_ = dataField.addText("${emoji}");
+        const Data_ = dataField.addText(${emoji});
         Data_.font = Font.systemFont(10);
         Data_.textColor = new Color(text_color)
         dataField.setPadding(0, 0, 5, 5)

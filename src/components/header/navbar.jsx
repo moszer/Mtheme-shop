@@ -1,5 +1,12 @@
 import React from 'react'
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+
 function navbar() {
   return (
           <div className="navbar bg-base-100">
@@ -38,7 +45,8 @@ function navbar() {
                 </a>
               </li>
               <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li><Link to="/Login">Login</Link></li>
+              <li><Link to="/Register">Register</Link></li>
             </ul>
           </div>
         </div>

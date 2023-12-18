@@ -4,7 +4,8 @@ import App from './App.jsx'
 import Designs from './components/Designs/Designs.jsx'
 import './index.css'
 import Home from './components/Home/Home.jsx'
-import Navigation from './components/navigation/Navigation.jsx'
+import Login from './components/login-register/login.jsx'
+import Register from './components/login-register/register.jsx'
 
 import {
   createBrowserRouter,
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     path: "/Home",
     element: <Home />
   },
+  {
+    path: "Login",
+    element: <Login />
+  },
+  {
+    path: "Register",
+    element: <Register />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
