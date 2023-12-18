@@ -1,13 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { checkToken } from '../../Controller';
 
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
   Link,
+  useNavigate,
 } from "react-router-dom";
 
 function navbar() {
+  const [isUser, setisUser] = useState(false)
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
+    checkToken(token)
+      .then(response => {
+        console.log("checktoken: ", response)
+        if(response.data === "Have a token"){
+          setisUser(true)
+        }
+      })
+  }, [])
+
+  const logoutEvent = () => {
+    window.localStorage.clear();
+    setisUser(false)
+  }
+
   return (
           <div className="navbar bg-base-100">
         <div className="flex-1">
@@ -45,8 +65,19 @@ function navbar() {
                 </a>
               </li>
               <li><a>Settings</a></li>
-              <li><Link to="/Login">Login</Link></li>
-              <li><Link to="/Register">Register</Link></li>
+              {isUser ? (
+                  // If the user is logged in
+                  <>
+                    {/* Render user-related content */}
+                    <li><a onClick={logoutEvent}>Logout</a></li>
+                  </>
+                ) : (
+                  // If the user is not logged in
+                  <>
+                    <li><Link to="/Login">Login</Link></li>
+                    <li><Link to="/Register">Register</Link></li>
+                  </>
+                )}
             </ul>
           </div>
         </div>

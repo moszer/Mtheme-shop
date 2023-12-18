@@ -49,7 +49,7 @@ export default function register() {
           })
       }
 
-
+      //check register and direct to login
       useEffect(() => {
         const resdataRegister = window.localStorage.getItem("resdataRegister")
         if(resdataRegister === "You registed!!" || resdataRegister === "Register Success"){

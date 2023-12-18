@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import Navigation from '../navigation/Navigation'
 import Navbar from '../header/navbar'
 import { useRecoilState } from 'recoil'
@@ -26,29 +26,30 @@ export default function login() {
     }
 
     //Login Event
-    const loginEvent = () => {
+    const loginEvent = async () => {
       Login(username_pass)
         .then(response => {
+          window.localStorage.setItem('token', "remove");
           window.localStorage.setItem("token", response.data.token)
           window.localStorage.setItem("name", response.data.payload.user.name)
-
           console.log(response)
+
+          const token = window.localStorage.getItem("token")
+
+          checkToken(token)
+              .then(response => {
+                console.log("checktoken: ", response)
+                if(response.data === "Have a token"){
+                  navigate("/")
+                }
+              })
+            
         })
         .catch(err => {
           console.log(err)
         })
     }
 
-    useEffect(() => {
-      const token = window.localStorage.getItem("token")
-      checkToken(token)
-        .then(response => {
-          console.log("checktoken: ", response)
-          if(response.data === "Have a token"){
-            navigate("/")
-          }
-        })
-    }, [])
 
   return (
     <div className='bg-base-200 h-screen pb-72'>
