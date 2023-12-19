@@ -11,7 +11,6 @@ import Lottie from "lottie-react";
 import catLoaing from '/src/assets/Animation - 1702732952547.json'
 import Sorry_warnning from '/src/assets/Warnning - 1702748099772.json'
 import { browserName } from 'react-device-detect';
-import { checkToken } from './Controller.js'
 
 function App() {
 

@@ -11,14 +11,17 @@ import {
 
 function navbar() {
   const [isUser, setisUser] = useState(false)
+  const [name, setname] = useState(null)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token")
+    const name = window.localStorage.getItem("name")
     checkToken(token)
       .then(response => {
         console.log("checktoken: ", response)
         if(response.data === "Have a token"){
           setisUser(true)
+          setname(name)
         }
       })
   }, [])
@@ -26,12 +29,20 @@ function navbar() {
   const logoutEvent = () => {
     window.localStorage.clear();
     setisUser(false)
+    window.location.reload();
   }
 
   return (
           <div className="navbar bg-base-100">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">MTHEME</a>
+        </div>
+        <div>
+            {name ? (
+              <p>{name}</p>
+            ) : (
+              <p></p>
+            )}
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
@@ -52,10 +63,10 @@ function navbar() {
             </div>
           </div>
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
+            <div tabIndex={0} role="button" className="btn btn-ghost">
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>

@@ -10,7 +10,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from '../navigation/Navigation'
 import convertToscriptable from '../../convertToscriptable'
-
+import { checkToken } from '../../Controller'
+import Lottie from "lottie-react";
+import Login_animation from "/src/assets/Login- 1703011367247.json"
+import { useNavigate , Link} from 'react-router-dom'
 //asset
 const My_theme = [
   {
@@ -65,10 +68,13 @@ const My_theme = [
 
 
 function Designs() {
+
+  const navigate = useNavigate()
   
   const [fileImg, setfileImg] = useState(null)
   const [Widget_data, setWidget_data]= useRecoilState(widgetData)
   const State_ = useRecoilValue(State)
+  const [stateLogin, setstateLogin] = useState(false)
   
 
   const handleFileChange = (event) => {
@@ -224,6 +230,19 @@ function Designs() {
       });
   };
 
+  //check user
+  const token = window.localStorage.getItem("token")
+  useEffect(() => {
+    checkToken(token)
+    .then(response => {
+      console.log("checktoken: ", response)
+      if(response.data === "Have a token"){
+          setstateLogin(true)
+      } 
+    })
+  }, [])
+
+if(stateLogin){
   return (
     <>
       <ToastContainer />
@@ -390,6 +409,22 @@ function Designs() {
         <Navigation />
     </>
   )
+} else {
+  return (
+    <>
+     <Navbar />
+    <div className='h-screen flex flex-col justify-center items-center pb-52'>
+          <Lottie animationData={Login_animation} loop={true} className='w-[250px]' style={{ margin: '-50px' }}/>
+        <p>Please login or register before using</p>
+        <div className='flex-row pt-3'>
+          <div className='btn bg-primary mr-4 w-20'><Link to="/Login">Login</Link></div>
+          <div className='btn bg-primary w-20'><Link to="/Register">Register</Link></div>
+        </div>
+    </div>
+    <Navigation />
+    </>
+  )
+}
 }
 
 export default Designs

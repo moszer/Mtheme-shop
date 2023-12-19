@@ -5,6 +5,8 @@ import { useRecoilState } from 'recoil'
 import { username_password } from '../../StoreUser'
 import { Login, checkToken } from '../../Controller'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function login() {
     const navigate = useNavigate()
@@ -40,20 +42,43 @@ export default function login() {
               .then(response => {
                 console.log("checktoken: ", response)
                 if(response.data === "Have a token"){
-                  navigate("/")
-                }
+                    navigate("/")
+                } 
               })
             
         })
         .catch(err => {
+          toast('Incorrect username or password.', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
           console.log(err)
         })
     }
 
 
+    function showToast(message, options) {
+  return new Promise((resolve) => {
+    toast(message, {
+      ...options,
+      onClose: () => {
+        resolve(); // Resolve the promise when the toast is closed
+      },
+    });
+  });
+}
+
+
   return (
     <div className='bg-base-200 h-screen pb-72'>
         <Navbar />
+        <ToastContainer />
     {/*
       This example requires updating your template:
 

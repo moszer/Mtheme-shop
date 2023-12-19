@@ -6,7 +6,7 @@ export function Register(user) {
         "username": user.username,
         "passwords": user.passwords
     }
-    return axios.post("http://172.20.10.4:3000/register", Username_pass)
+    return axios.post("https://register-register-mtheme.onrender.com/register", Username_pass)
 }
 
 
@@ -16,7 +16,7 @@ export function Login(user) {
         "username": user.username,
         "passwords": user.passwords
     }
-    return axios.post("http://172.20.10.4:3000/Login", Username_pass)
+    return axios.post("https://register-register-mtheme.onrender.com/Login", Username_pass)
 }
 
 export function checkToken(token) {
@@ -25,7 +25,7 @@ export function checkToken(token) {
 
     var config = {
     method: 'post',
-    url: 'http://172.20.10.4:3000/checkToken',
+    url: 'https://register-register-mtheme.onrender.com/checkToken',
     headers: { 
         'authtoken': token
     },

@@ -1,16 +1,18 @@
-import React,{useEffect, useState} from 'react'
+import React,{ useEffect } from 'react'
 import Navigation from '../navigation/Navigation'
 import Navbar from '../header/navbar'
 import { useRecoilState } from 'recoil';
 import { resOfRegister, username_password } from '../../StoreUser';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Register } from '../../Controller';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function register() {
       const navigation = useNavigate()
       const [username_, setusername] = useRecoilState(username_password);
       const [resRegister, setRegister] = useRecoilState(resOfRegister)
-      const [isUser, setisUser] = useState(true)
 
       const getUsername = (e) =>{
         setusername({
@@ -52,18 +54,30 @@ export default function register() {
       //check register and direct to login
       useEffect(() => {
         const resdataRegister = window.localStorage.getItem("resdataRegister")
-        if(resdataRegister === "You registed!!" || resdataRegister === "Register Success"){
+        if(resdataRegister === "Register Success"){
           console.log("YOU REGISTED")
-          setisUser(false)
           navigation("/Login")
+        }
+        if(resdataRegister === "You registed!!"){
+          toast('If you already have this account, please use a different email address.', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          window.localStorage.clear()
         }
 
       },[registerEvent])
 
-  if(true){
   return (
     <div className='bg-base-200 h-screen pb-72'>
         <Navbar />
+        <ToastContainer />
     {/*
       This example requires updating your template:
 
@@ -112,19 +126,4 @@ export default function register() {
     <Navigation />
   </div>
   )
-} else {
-    return(
-        <div className='flex flex-col gap-5 h-screen justify-center items-center p-4'>
-            <div className='flex justify-center'>
-                <h1 className='text-1xl'>Have a User</h1>
-            </div>
-             <div className='flex justify-center gap-5'>
-                <button className='btn bg-primary'>
-                  <Link to="/">Homepage</Link>
-                </button>
-                <button className='btn bg-error text-white'>Logout</button>
-             </div>
-        </div>
-    )
-}
 }
