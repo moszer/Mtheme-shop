@@ -26,3 +26,12 @@ export const resOfRegister = atom({
             resdataLogin: "",
         }
 })
+
+
+export const idStudent = atom({
+    key: 'idstudent',
+        default: {
+            username: "",
+            passwords: "",
+        }
+})

@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from '../navigation/Navigation'
 import convertToscriptable from '../../convertToscriptable'
-import { checkToken } from '../../Controller'
+import { checkToken, getDataProducts } from '../../Controller'
 import Lottie from "lottie-react";
 import Login_animation from "/src/assets/Login- 1703011367247.json"
 import { useNavigate , Link} from 'react-router-dom'
@@ -232,6 +232,9 @@ function Designs() {
 
   //check user
   const token = window.localStorage.getItem("token")
+  const name = window.localStorage.getItem("name")
+  const [dataproducts, setdataproducts] = useState(null)
+
   useEffect(() => {
     checkToken(token)
     .then(response => {
@@ -240,7 +243,24 @@ function Designs() {
           setstateLogin(true)
       } 
     })
+    getDataProducts(name, token)
+      .then(response => {
+        setdataproducts(response.data.products)
+        if(response.data.products === null){
+          toast("💸 Plese purchase before using this page 💸" , {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+        }
+      })
   }, [])
+
 
 if(stateLogin){
   return (

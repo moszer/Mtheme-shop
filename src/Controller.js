@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export function Register(user) {
     const Username_pass = {
 
@@ -33,8 +34,45 @@ export function checkToken(token) {
     };
 
     return axios(config)
-        
-    .catch(function (error) {
+        .catch(function (error) {
+            console.log(error);
+});
+}
+
+export function setProducts(data, token) {
+
+    var data = JSON.stringify({"productId":"1212","productName":"mtheme","quantity":"1","price":"29","username":"mos"});
+
+    var config = {
+    method: 'post',
+    url: 'https://register-register-mtheme.onrender.com/products',
+    headers: { 
+        'authtoken': token,
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+    return axios(config)
+        .catch(function (error) {
+            console.log(error);
+});
+}
+
+
+export function getDataProducts(data, token) {
+    var data = JSON.stringify({"username": data});
+    var config = {
+    method: 'post',
+    url: 'https://register-register-mtheme.onrender.com/getproducts',
+    headers: { 
+        'authtoken': token,
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    return axios(config)
+        .catch(function (error) {
         console.log(error);
 });
 }

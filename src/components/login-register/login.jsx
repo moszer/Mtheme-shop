@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function login() {
     const navigate = useNavigate()
     const [username_pass, setusername_pass] = useRecoilState(username_password)
-
+    const [loading, setLoading] = useState(false)
     const usernameEvent = (e) => {
       console.log(e.target.value)
       setusername_pass({
@@ -29,6 +29,7 @@ export default function login() {
 
     //Login Event
     const loginEvent = async () => {
+      setLoading(true);
       Login(username_pass)
         .then(response => {
           window.localStorage.setItem('token', "remove");
@@ -45,6 +46,10 @@ export default function login() {
                     navigate("/")
                 } 
               })
+              .finally(() => {
+                // Set loading state to false regardless of success or failure
+                setLoading(false);
+              });
             
         })
         .catch(err => {
@@ -60,19 +65,27 @@ export default function login() {
           });
           console.log(err)
         })
+        .finally(() => {
+          // Set loading state to false regardless of success or failure
+          setLoading(false);
+        });
     }
 
+    useEffect(() => {
+      if(loading){
+        toast('Loading...', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }, [loading])
 
-    function showToast(message, options) {
-  return new Promise((resolve) => {
-    toast(message, {
-      ...options,
-      onClose: () => {
-        resolve(); // Resolve the promise when the toast is closed
-      },
-    });
-  });
-}
 
 
   return (
