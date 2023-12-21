@@ -233,8 +233,6 @@ function Designs() {
   //check user
   const token = window.localStorage.getItem("token")
   const name = window.localStorage.getItem("name")
-  const [dataproducts, setdataproducts] = useState(null)
-
   useEffect(() => {
     checkToken(token)
     .then(response => {

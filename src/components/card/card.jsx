@@ -1,6 +1,6 @@
 import { CheckIcon } from '@heroicons/react/20/solid'
-import Countdown from '../countdown/countdown'
 import Carousel_noblackground from '../carousel/carousel_noblackground'
+import { Purchase } from '../../Controller'
 
 const includedFeatures = [
   'Generate with ID: สร้างตารางเรียนด้วยรหัสนักศึกษา',
@@ -11,6 +11,19 @@ const includedFeatures = [
 ]
 
 export default function Example() {
+
+  const handleCheckout = async () => {
+    try {
+      const token = window.localStorage.getItem("token")
+      Purchase(1, "http://172.20.10.4:5173", token)
+        .then(response => {
+            window.location.href = response.data.url; // Redirect to the Stripe checkout page
+        })
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+    }
+  };
+
   return (
     <div className="bg-base-200 py-24 sm:py-32">
   <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -52,8 +65,8 @@ export default function Example() {
               <span className="text-sm font-semibold leading-6 tracking-wide">บาท</span>
             </p>
             <a
-              href="#"
               className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={handleCheckout}
             >
               ซื้อ
             </a>

@@ -12,6 +12,9 @@ import catLoaing from '/src/assets/Animation - 1702732952547.json'
 import Sorry_warnning from '/src/assets/Warnning - 1702748099772.json'
 import { browserName } from 'react-device-detect';
 
+import Swal from 'sweetalert2'
+import { setProducts } from './Controller.js'
+
 function App() {
 
   const [isLoading, setisLoading]= useRecoilState(State)
@@ -51,6 +54,51 @@ function App() {
     window.open(`${WindownUrl}?openExternalBrowser=1`);
   }
 
+
+  //check purchase 
+
+  useEffect(() => {
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Check if the success parameter is true
+    const isSuccess = urlParams.get('success') === 'true';
+
+    if (isSuccess) {
+      // Perform actions for a successful payment
+      console.log('Payment successful!');
+     //{"productId": productId,"productName": productName,"quantity": quantity,"price": price,"username": username}
+      const username = window.localStorage.getItem("name")
+      const token = window.localStorage.getItem("token")
+
+      setProducts(1212, "MTHEME", 1 , 29, username, token)
+
+      if (window.location.search.includes('success=true')) {
+        // Remove the success parameter from the URL
+        const newUrl = window.location.href.replace('?success=true', '');
+      
+        // Replace the current URL without the success parameter
+        window.history.replaceState({}, document.title, newUrl);
+      }
+
+      Swal.fire({
+        title: 'Purchase',
+        text: 'Purchase successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        // Check if the user clicked the "OK" button
+        if (result.isConfirmed) {
+          // Reload the website
+          window.location.reload();
+        }
+      });
+
+    } else {
+      // Perform actions for a canceled or failed payment
+      console.log('Payment canceled or failed.');
+    }
+  }, []); // The empty dependency array ensures that this effect runs only once after the component mounts
 
   return (
     <div>

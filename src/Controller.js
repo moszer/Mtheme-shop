@@ -39,9 +39,9 @@ export function checkToken(token) {
 });
 }
 
-export function setProducts(data, token) {
+export function setProducts(productId, productName ,quantity ,price, username, token) {
 
-    var data = JSON.stringify({"productId":"1212","productName":"mtheme","quantity":"1","price":"29","username":"mos"});
+    var data = JSON.stringify({"productId": productId,"productName": productName,"quantity": quantity,"price": price,"username": username});
 
     var config = {
     method: 'post',
@@ -76,3 +76,24 @@ export function getDataProducts(data, token) {
         console.log(error);
 });
 }
+
+export function Purchase(quantity, domain , token) {
+    var data = JSON.stringify({"quantity":quantity,"domain":domain});
+
+    var config = {
+      method: 'post',
+      url: 'https://register-register-mtheme.onrender.com/create-checkout-session',
+      headers: { 
+        'authtoken': token,
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    return axios(config)
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+

@@ -26,7 +26,8 @@ function navbar() {
         }
       })
 
-      getDataProducts("mos" ,token)
+      
+      getDataProducts(name ,token)
         .then(response => {
           setdataproducts(response.data.products)
         })
