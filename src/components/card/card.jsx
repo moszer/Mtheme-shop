@@ -15,7 +15,8 @@ export default function Example() {
   const handleCheckout = async () => {
     try {
       const token = window.localStorage.getItem("token")
-      Purchase(1, "http://172.20.10.4:5173", token)
+      const currentUrl = window.location.href;
+      Purchase(1, currentUrl, token)
         .then(response => {
             window.location.href = response.data.url; // Redirect to the Stripe checkout page
         })
