@@ -1,7 +1,27 @@
 {
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "public/**/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "/(.*).(jsx|js)",
+        "dest": "/index.html",
+        "buildCommand": "npm run build",
+        "use": "@now/node"
+      }
+    ],
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/(.*)", "dest": "/" }
+      {
+        "src": "/.*",
+        "dest": "/index.html"
+      }
     ]
-}
+  }
   
