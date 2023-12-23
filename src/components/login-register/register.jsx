@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect, useState } from 'react'
 import Navigation from '../navigation/Navigation'
 import Navbar from '../header/navbar'
 import { useRecoilState } from 'recoil';
@@ -9,11 +9,14 @@ import { Register } from '../../Controller';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Lottie from 'lottie-react'
+import catLoaing from '/src/assets/Animation - 1702732952547.json'
+
 export default function register() {
       const navigation = useNavigate()
       const [username_, setusername] = useRecoilState(username_password);
       const [resRegister, setRegister] = useRecoilState(resOfRegister)
-
+      const [Loading, setLoading] = useState(false)
       const getUsername = (e) =>{
         setusername({
             ...username_,
@@ -37,8 +40,9 @@ export default function register() {
 
 
       //register event
-      const registerEvent = () => {
-        Register(username_)
+      const registerEvent = async () => {
+        setLoading(true)
+        await Register(username_)
           .then(response => {
             setRegister({
               ...resRegister,
@@ -49,6 +53,8 @@ export default function register() {
           .catch(err => {
             console.log(err)
           })
+
+          setLoading(true)
       }
 
       //check register and direct to login
@@ -86,6 +92,21 @@ export default function register() {
       <body class="h-full">
       ```
     */}
+
+
+    {Loading ? (
+      <>
+        <div className='flex justify-center items-center h-screen mt-[-100px]'>
+        <div className='flex flex-col'>
+          <Lottie animationData={catLoaing} loop={true} className='w-[250px]'/>
+          <p className='flex justify-center pt-[20px]'>
+            Loading plese wait a moment...
+          </p>
+        </div>
+        </div>
+      </>
+    ):(
+
     <div className="flex min-h-full flex-col justify-center px-7 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
@@ -119,10 +140,10 @@ export default function register() {
                 Register
             </button>
           </div>
-
-       
       </div>
     </div>
+)}
+
     <Navigation />
   </div>
   )

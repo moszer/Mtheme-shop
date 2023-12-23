@@ -265,7 +265,6 @@ if(stateLogin){
     <>
       <ToastContainer />
       <Uploadimgur imgData={fileImg} />
-
       <Navbar />
         <div className='pt-5 pb-40 bg-base-200 h-screen'>
           <div className='flex justify-center'>DESIGNS</div>
