@@ -94,15 +94,44 @@ function App() {
         }
       });
 
-    } else {
-      // Perform actions for a canceled or failed payment
-      console.log('Payment canceled or failed.');
+    } 
+
+    const isCanceled = urlParams.get('canceled') === 'true';
+
+    if(isCanceled ){
+      if (window.location.search.includes('canceled=true')) {
+        // Remove the success parameter from the URL
+        const newUrl = window.location.href.replace('?canceled=true', '');
+      
+        // Replace the current URL without the success parameter
+        window.history.replaceState({}, document.title, newUrl);
+      }
+
+       Swal.fire({
+        title: 'Purchase',
+        text: 'Purchase fail',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        // Check if the user clicked the "OK" button
+        if (result.isConfirmed) {
+          // Reload the website
+          window.location.reload();
+        }
+      });
     }
+     
   }, []); // The empty dependency array ensures that this effect runs only once after the component mounts
+
+  useEffect(() => {
+      const theme_change = window.localStorage.getItem("selectedTheme")
+      document. querySelector ("html"). setAttribute("data-theme", theme_change);
+  }, []); // Empty dependency array ensures the effect runs once after the component mounts
 
   return (
     <div>
       <Navbar />
+
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <form method="dialog">

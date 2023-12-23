@@ -15,7 +15,6 @@ import catLoaing from '/src/assets/Animation - 1702732952547.json'
 export default function register() {
       const navigation = useNavigate()
       const [username_, setusername] = useRecoilState(username_password);
-      const [resRegister, setRegister] = useRecoilState(resOfRegister)
       const [Loading, setLoading] = useState(false)
       const getUsername = (e) =>{
         setusername({
@@ -32,53 +31,45 @@ export default function register() {
       }
 
       useEffect(() => {
-
-        console.log(username_)
-        console.log(resRegister.resdataRegister)
-
-      }, [username_, resRegister])
+         console.log(username_)
+      }, [username_])
 
 
-      //register event
       const registerEvent = async () => {
-        setLoading(true)
-        await Register(username_)
-          .then(response => {
-            setRegister({
-              ...resRegister,
-                resdataRegister: response
-            })
-            window.localStorage.setItem("resdataRegister", response.data)
-          })
-          .catch(err => {
-            console.log(err)
-          })
+        try {
+          setLoading(true);
+      
+          // Assuming Register is an asynchronous function, use await directly
+          const response = await Register(username_);
+          
+          // Use localStorage.setItem with a key-value pair
+          window.localStorage.setItem("resdataRegister", response.data);
 
-          setLoading(true)
-      }
+          if(response.data === "Register Success"){
+            console.log("YOU REGISTED")
+            navigation("/Login")
+          }
 
-      //check register and direct to login
-      useEffect(() => {
-        const resdataRegister = window.localStorage.getItem("resdataRegister")
-        if(resdataRegister === "Register Success"){
-          console.log("YOU REGISTED")
-          navigation("/Login")
+          if(response.data === "You registed!!"){
+            toast('If you already have this account, please use a different email address.', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            window.localStorage.clear()
+          }
+      
+          setLoading(false); // Set loading to false after the operation is complete
+        } catch (err) {
+          console.error(err);
+          setLoading(false); // Set loading to false in case of an error
         }
-        if(resdataRegister === "You registed!!"){
-          toast('If you already have this account, please use a different email address.', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          window.localStorage.clear()
-        }
-
-      },[registerEvent])
+      };
 
   return (
     <div className='bg-base-200 h-screen pb-72'>

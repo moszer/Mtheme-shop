@@ -32,67 +32,50 @@ export default function login() {
 
     //Login Event
     const loginEvent = async () => {
-      setLoading(true);
-      Login(username_pass)
-        .then(response => {
-          window.localStorage.setItem('token', "remove");
-          window.localStorage.setItem("token", response.data.token)
-          window.localStorage.setItem("name", response.data.payload.user.name)
-          console.log(response)
-
-          const token = window.localStorage.getItem("token")
-
-          checkToken(token)
-              .then(response => {
-                console.log("checktoken: ", response)
-                if(response.data === "Have a token"){
-                    navigate("/")
-                } 
-              })
-              .finally(() => {
-                // Set loading state to false regardless of success or failure
-                setLoading(false);
-              });
-            
-        })
-        .catch(err => {
-          toast('Incorrect username or password.', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          console.log(err)
-        })
-        .finally(() => {
-          // Set loading state to false regardless of success or failure
-          setLoading(false);
-        });
-    }
-
-    useEffect(() => {
-      if(loading){
-        toast('Loading...', {
-          position: "top-right",
+      try {
+        setLoading(true);
+    
+        const loginResponse = await Login(username_pass);
+    
+        // Store token and user information in localStorage
+        window.localStorage.setItem('token', 'remove');
+        window.localStorage.setItem('token', loginResponse.data.token);
+        window.localStorage.setItem('name', loginResponse.data.payload.user.name);
+    
+        const token = window.localStorage.getItem('token');
+    
+        // Check the token
+        const checkTokenResponse = await checkToken(token);
+    
+        console.log('checktoken: ', checkTokenResponse);
+    
+        if (checkTokenResponse.data === 'Have a token') {
+          navigate('/');
+        }
+      } catch (error) {
+        // Handle errors during login or token check
+        toast.error('Incorrect username or password.', {
+          position: 'top-right',
           autoClose: 5000,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
+        
+        setLoading(false);
+        console.error(error);
+      } finally {
+        // Set loading state to false regardless of success or failure
+        setLoading(false);
       }
-    }, [loading])
-
-
+    };
+    
 
   return (
-    <div className='bg-base-200 h-screen pb-72'>
+    <div className='bg-base-200 h-screen w-screen pb-72 fixed'>
         <Navbar />
         <ToastContainer />
     {/*

@@ -76,6 +76,7 @@ function Designs() {
   const State_ = useRecoilValue(State)
   const [stateLogin, setstateLogin] = useState(false)
   
+  
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -259,10 +260,15 @@ function Designs() {
       })
   }, [])
 
+  useEffect(() => {
+    const theme_change = window.localStorage.getItem("selectedTheme")
+    document. querySelector ("html"). setAttribute("data-theme", theme_change);
+}, []); // Empty dependency array ensures the effect runs once after the component mounts
+
 
 if(stateLogin){
   return (
-    <>
+    <div className='fixed w-screen'>
       <ToastContainer />
       <Uploadimgur imgData={fileImg} />
       <Navbar />
@@ -271,7 +277,7 @@ if(stateLogin){
           
           <div className='flex pb-10 pt-5 justify-center'>
             <Widget item={Widget_data} className='rounded-3xl w-full' />
-          </div>
+        </div>
 
 
           {/* image editer*/}
@@ -424,11 +430,11 @@ if(stateLogin){
             </div>
         </div>
         <Navigation />
-    </>
+    </div>
   )
 } else {
   return (
-    <>
+    <div className='fixed w-screen'>
      <Navbar />
     <div className='h-screen flex flex-col justify-center items-center pb-52'>
           <Lottie animationData={Login_animation} loop={true} className='w-[250px]' style={{ margin: '-50px' }}/>
@@ -439,7 +445,7 @@ if(stateLogin){
         </div>
     </div>
     <Navigation />
-    </>
+    </div>
   )
 }
 }
