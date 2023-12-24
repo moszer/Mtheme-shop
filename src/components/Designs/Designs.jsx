@@ -10,13 +10,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navigation from "../navigation/Navigation";
 import convertToscriptable from "../../convertToscriptable";
-import { Purchase, Tryproducts, checkToken, getDataProducts, setProducts } from "../../Controller";
+import { Tryproducts, checkToken, getDataProducts, setProducts } from "../../Controller";
 import Lottie from "lottie-react";
 import Login_animation from "/src/assets/Login- 1703011367247.json";
 import Loadingimage from "/src/assets/Loadingimage - 1703353211028.json";
 import Swal from 'sweetalert2'
 import { Link, useNavigate } from "react-router-dom";
-import login from "../login-register/login";
 //asset
 
 const My_theme = [
@@ -291,10 +290,11 @@ function Designs() {
 
   const alert_try_purchase = () => {
       Swal.fire({
-        title: "Try or purchase",
-        text: "You clicked the button!",
-        icon: "success",
+        title: "PURCHASE",
+        text: "[ กรุณาชำระเงินที่หน้าเว็บไซต์ก่อนใช้งาน ]",
+        icon: "info",
         showCancelButton: true,
+        showConfirmButton: false, // Hide the confirm button
         confirmButtonText: "Try for Free 7 days",
         cancelButtonText: "Purchase",
         customClass: "bg-base-200",

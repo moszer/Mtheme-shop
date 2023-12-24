@@ -86,11 +86,17 @@ function App() {
       }
 
       Swal.fire({
-        title: "Purchase",
-        text: "Purchase successfully",
+        title: "PURCHASE",
+        text: "[ ชำระเงินเสร็จสิ้น ]",
         icon: "success",
         confirmButtonText: "OK",
+        customClass: "bg-base-200",
         allowOutsideClick: false, // Set this option to prevent tapping to exit
+        backdrop: `
+          url("/src/assets/Money-rian- 1703438102793.gif")
+          center
+          no-repeat
+        `
       }).then((result) => {
         // Check if the user clicked the "OK" button
         if (result.isConfirmed) {
