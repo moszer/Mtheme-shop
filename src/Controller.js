@@ -97,3 +97,28 @@ export function Purchase(quantity, domain , token) {
 }
 
 
+export function Tryproducts(name, days , token) {
+
+    var data = JSON.stringify({
+
+        "username":name,
+        "day":days
+
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://register-register-mtheme.onrender.com/tryproducts',
+      headers: { 
+        'authtoken': token,
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    return axios(config)
+        .catch(function (error) {
+            console.log(error);
+});
+}
+

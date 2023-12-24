@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import Designs from './components/Designs/Designs.jsx'
-import './index.css'
-import Home from './components/Home/Home.jsx'
-import Login from './components/login-register/login.jsx'
-import Register from './components/login-register/register.jsx'
-import Checkout from './components/checkout/Checkout.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import Designs from "./components/Designs/Designs.jsx";
+import "./index.css";
+import Home from "./components/Home/Home.jsx";
+import Login from "./components/login-register/login.jsx";
+import Register from "./components/login-register/register.jsx";
+import Checkout from "./components/checkout/Checkout.jsx";
 
 import {
   createBrowserRouter,
@@ -15,10 +15,7 @@ import {
   Link,
 } from "react-router-dom";
 
-import {
-  RecoilRoot,
-} from 'recoil';
-
+import { RecoilRoot } from "recoil";
 
 const router = createBrowserRouter([
   {
@@ -27,32 +24,32 @@ const router = createBrowserRouter([
   },
   {
     path: "/Designs",
-    element: <Designs />
+    element: <Designs />,
   },
   {
     path: "/Home",
-    element: <Home />
+    element: <Home />,
   },
   {
     path: "/Login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/Register",
-    element: <Register />
+    element: <Register />,
   },
   {
     path: "/Checkout",
-    element: <Checkout />
-  }
+    element: <Checkout />,
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-     <RecoilRoot>
+    <RecoilRoot>
       <div className="bg-base-200">
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </div>
-     </RecoilRoot>
-  </React.StrictMode>,
-)
+    </RecoilRoot>
+  </React.StrictMode>
+);

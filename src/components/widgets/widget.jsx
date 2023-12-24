@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 function Widget({ item }) {
   const [widgetStyles, setWidgetStyles] = useState({
@@ -23,11 +23,15 @@ function Widget({ item }) {
   }, [item]);
 
   const widgetBgStyle = {
-    backgroundImage: widgetStyles.imageHave ? `url("${widgetStyles.img}")` : 'none',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundColor: widgetStyles.imageHave ? 'transparent' : widgetStyles.widgetColorBg,
-    borderRadius: '1rem'
+    backgroundImage: widgetStyles.imageHave
+      ? `url("${widgetStyles.img}")`
+      : "none",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundColor: widgetStyles.imageHave
+      ? "transparent"
+      : widgetStyles.widgetColorBg,
+    borderRadius: "1rem",
   };
 
   const navHeaderStyle = {
@@ -41,17 +45,34 @@ function Widget({ item }) {
 
   return (
     <div className="flex items-center justify-center bg-white rounded-3xl">
-      <div className="h-44 w-[360px] bg-blue-500 text-white flex items-center justify-center widget-bg" style={widgetBgStyle}>
+      <div
+        className="h-44 w-[360px] bg-blue-500 text-white flex items-center justify-center widget-bg"
+        style={widgetBgStyle}
+      >
         <div className="row">
-          <div className="rounded-lg h-8 m-2 mt-0 flex items-center nav-bg" style={navHeaderStyle}>
+          <div
+            className="rounded-lg h-8 m-2 mt-0 flex items-center nav-bg"
+            style={navHeaderStyle}
+          >
             <div className="ml-2">Schedule</div>
             <div className="ml-auto pr-2 text-xs">Friday 12/11/2023</div>
           </div>
-          <div className="row pt-5 pr-12 pl-1 data-content" style={dataContentStyle}>
-                <p className="pb-1 text-xs">[ 😇 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00</p>
-                <p className="pb-1 text-xs">[ 🙄 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00</p>
-                <p className="pb-1 text-xs">[ 😯 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00</p>
-                <p className="pb-1 text-xs">[ 😵‍💫 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00</p>
+          <div
+            className="row pt-5 pr-12 pl-1 data-content"
+            style={dataContentStyle}
+          >
+            <p className="pb-1 text-xs">
+              [ 😇 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00
+            </p>
+            <p className="pb-1 text-xs">
+              [ 🙄 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00
+            </p>
+            <p className="pb-1 text-xs">
+              [ 😯 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00
+            </p>
+            <p className="pb-1 text-xs">
+              [ 😵‍💫 ] 0000000000 Sec 6, รป 5-03 เวลา: 9:00-12:00
+            </p>
           </div>
         </div>
       </div>
