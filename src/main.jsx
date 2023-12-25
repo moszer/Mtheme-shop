@@ -7,6 +7,7 @@ import Home from "./components/Home/Home.jsx";
 import Login from "./components/login-register/login.jsx";
 import Register from "./components/login-register/register.jsx";
 import Checkout from "./components/checkout/Checkout.jsx";
+import Exportpage from "./components/export-widget-page/exportpage.jsx";
 
 import {
   createBrowserRouter,
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     path: "/Checkout",
     element: <Checkout />,
   },
+  {
+    path: "/export",
+    element: <Exportpage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
