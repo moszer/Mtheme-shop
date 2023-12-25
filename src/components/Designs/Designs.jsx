@@ -350,15 +350,7 @@ function Designs() {
     let ObjectWidget = window.localStorage.getItem("DataWidget");
     console.log(ObjectWidget);
     window.localStorage.setItem("DataWidget", JSON.stringify(Widget_data));
-    await convertToscriptable();
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Exported",
-      customClass: "bg-base-200",
-      showConfirmButton: false,
-      timer: 1500
-    });
+    usenavigate("/export")
   };
 
   //savedaft widget

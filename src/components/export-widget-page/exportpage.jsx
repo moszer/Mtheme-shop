@@ -3,6 +3,7 @@ import Navbar from '../header/navbar'
 import Navigation from '../navigation/Navigation'
 import Swal from 'sweetalert2';
 import { Getschedule } from '../../Controller';
+import convertToscriptable from '../../convertToscriptable';
 function export_page() {
 
   const DownloadScriptableEvent = () => {
@@ -13,48 +14,65 @@ function export_page() {
     window.location.href = appStoreLink;
   };
 
-  const SetUpId = () => {
-    Swal.fire({
+  const SetUpId = async () => {
+    const { value: formValues } = await Swal.fire({
       title: "รหัสนักศึกษา",
       html:
-      '<div class="text-sm">ใช้รหัสนักศึกษาและพาสเวิดของงานทะเบียนเพื่อใช้ข้อมูลตารางสอน ตัวอย่าง <div class="flex justify-center"><div class="flex flex-row"><div class="pr-[4px]">username:</div><div class="text-red-900 bg-black w-fit">116510001001-2</div></div></div>   <div class="flex justify-center"><div class="flex flex-row"><div class="pr-[4px]">passwords:</div><div class="text-red-900 bg-black w-fit">XXXXXX</div></div></div></div>' +
-      '<div class="my-4"><input type="text" placeholder="Your username" id="username" class="input input-bordered w-full max-w-xs p-2 text-primary" />' +
-      '<div class="my-4"><input type="text" placeholder="Your password" id="password" class="input input-bordered w-full max-w-xs p-2 text-primary" />' +
-      '<div class="text-red-900 text-sm pt-4">ห้ามใส่ password ผิดเกิน3ครั้งระบบจะล็อก<div>',
+        '<div class="text-sm">ใช้รหัสนักศึกษาและพาสเวิดของงานทะเบียนเพื่อใช้ข้อมูลตารางสอน ตัวอย่าง <div class="flex justify-center"><div class="flex flex-row"><div class="pr-[4px]">username:</div><div class="text-red-900 bg-black w-fit">116510001001-2</div></div></div>   <div class="flex justify-center"><div class="flex flex-row"><div class="pr-[4px]">passwords:</div><div class="text-red-900 bg-black w-fit">XXXXXX</div></div></div></div>' +
+        '<div class="my-4"><input type="text" placeholder="Your username" id="username" class="input input-bordered w-full max-w-xs p-2 text-primary" />' +
+        '<div class="my-4"><input type="text" placeholder="Your password" id="password" class="input input-bordered w-full max-w-xs p-2 text-primary" />' +
+        '<div class="text-red-900 text-sm pt-4">ห้ามใส่ password ผิดเกิน3ครั้งระบบจะล็อก<div>',
       showCancelButton: true,
       background: "#000000",
-      confirmButtonText: "Look up",
+      confirmButtonText: "Login",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        return new Promise(async (resolve) => {
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
   
-        if (!username || !password) {
-          Swal.showValidationMessage("Please enter both username and password");
-        }
-  
-        // Log the entered values (you may want to handle this data as needed)
-        console.log("Username: ", username);
-        console.log("Password: ", password);
-
+          if (!username || !password) {
+            Swal.showValidationMessage("กรุณากรอกทั้งชื่อผู้ใช้และรหัสผ่าน");
+            resolve(false);
+          } else {
+            try {
+              const res = await Getschedule(username, password);
+              if (res.data === "") {
+                Swal.showValidationMessage("กรุณาป้อนรหัสประจำตัวและรหัสผ่านให้ถูกต้อง");
+              } else {
+                console.log(res.data);
+              }
+              // Process the response data as needed
+              resolve(true); // Close the Swal modal
+            } catch (error) {
+              console.error("Error fetching schedule:", error);
+              // Handle the error, e.g., display an error message to the user
+              resolve(false);
+            }
+          }
+        });
       },
       customClass: {
-        container: 'swal-center', // Add a custom class for centering
+        container: "swal-center", // Add a custom class for centering
       },
     });
   };
+
+  const exportWidget = async () => {
+    let ObjectWidget = window.localStorage.getItem("DataWidget");
+    console.log(ObjectWidget);
+    await convertToscriptable();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Exported",
+      customClass: "bg-base-200",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  };
   
-  useEffect(() => {
-    Getschedule("116610461223-7", "Moszer123")
-      .then((res) => {
-        console.log(res);
-        // Process the response data as needed
-      })
-      .catch((error) => {
-        console.error('Error fetching schedule:', error);
-        // Handle the error, e.g., display an error message to the user
-      });
-  }, []);
+  
 
 
   return (
@@ -74,7 +92,7 @@ function export_page() {
             <div className="divider">⬇️</div> 
             <div className="grid h-[100px] card bg-base-300 rounded-box place-items-center p-[10px]">
               3.ดาวโหลด widgets
-              <button className='btn bg-primary w-[150px]'>Download</button>
+              <button className='btn bg-primary w-[150px]' onClick={exportWidget}>Download</button>
             </div>
             <div className="divider">⬇️</div> 
             <div className="grid h-[100px] card bg-base-300 rounded-box place-items-center p-[10px]">
