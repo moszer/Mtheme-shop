@@ -4,10 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function convertToscriptable() {
 
     let ObjectWidget = window.localStorage.getItem("DataWidget");
+    let username_password = window.localStorage.getItem("id_user")
     let dataW = JSON.parse(ObjectWidget)
+    let id_user = JSON.parse(username_password)
 
-    const username = "1166104612237"
-    const passwords = "Moszer123"
+    console.log("id_user: ", id_user)
+
+    const username = id_user.username
+    const passwords = id_user.password
 
     const nav_bg_color = dataW.Nav_color_bg
     const data_t_color = dataW.data_color_text
