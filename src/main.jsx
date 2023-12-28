@@ -11,9 +11,7 @@ import Exportpage from "./components/export-widget-page/exportpage.jsx";
 
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
+  RouterProvider
 } from "react-router-dom";
 
 import { RecoilRoot } from "recoil";

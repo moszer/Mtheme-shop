@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Typewriter from 'typewriter-effect';
+import React from 'react';
 import "/src/App.css"
 import { useRecoilState } from 'recoil';
 import State from '../../State';
@@ -29,21 +28,14 @@ function Hero() {
 
       <div className="hero-content flex-col lg:flex-row relative">
         <img
-          src="https://i.imgur.com/Q2HEKmc.png"
+          src="https://iili.io/JRksD22.md.png"
           className="max-w-sm rounded-lg shadow-2xl rounded-3xl"
           style={{ width: '270px', height: 'auto' }} // Set the desired width and maintain the aspect ratio
           onLoad={handleLoad}
         />
         <div>
           <h1 className="text-4xl my-font">
-            <Typewriter
-              options={{
-                strings: ['WIDGET MTHEME'],
-                autoStart: true,
-                loop: true,
-                delay: 50
-              }}
-            />
+          WIDGET MTHEME
           </h1>
 
           <p className="py-6 my-font2">Widget Table ช่วยให้คุณสามารถมองเห็นตารางเรียนของคุณได้อย่างรวดเร็วและสะดวก</p>
