@@ -7,7 +7,7 @@ import convertToscriptable from '../../convertToscriptable';
 import Lottie from 'lottie-react';
 import Check from '/src/assets/Check - 1703595979883.json'
 import Arrow from '/src/assets/Downarrow - 1703597644598.json'
-
+import WistiaPlayer from './WistiaPlayer';
 function export_page() {
 
   const DownloadScriptableEvent = () => {
@@ -88,7 +88,7 @@ function export_page() {
     if(id_user && id_user_login){
       let ObjectWidget = window.localStorage.getItem("DataWidget");
       console.log(ObjectWidget);
-      await convertToscriptable();
+      convertToscriptable();
       setcheck3(true)
       Swal.fire({
         position: "top-end",
@@ -110,7 +110,30 @@ function export_page() {
         timer: 5000,
       });
     }
+    if(!id_user){
+      setcheck3(false)
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "ERROR TOKEN",
+        text: "ระบบผิดพลาดโปรดล็อกอินก่อนใช้งาน",
+        customClass: "bg-base-200",
+        showConfirmButton: false,
+        timer: 5000,
+      });
+    }
   };
+
+  const showVideo = () => {
+    const videoHtml = ReactDOMServer.renderToString(
+      <WistiaPlayer videoId="7zmqux232b" wrapper="wistia-player-container-1" />
+    );
+    Swal.fire({
+      html:  videoHtml,
+      showCloseButton: true,
+      showConfirmButton: false,
+    });
+  }
 
     //theme change update
     useEffect(() => {
@@ -127,7 +150,19 @@ function export_page() {
             <div className='flex justify-center text-xl'>วิธีติดตั้ง widget</div>
             <div className='text-sm'>Tip: ถ้าติดตั้งแอป Scriptable แล้วสามารถข้ามไปขั้นตอนที่ 2 ได้เลยโปรดดูคลิปสอนติดตั้งก่อนใช้งาน</div>
             <div className='pt-4'>
-              <button className='btn bg-blue-200 text-black'>คลิปสอนใช้งาน</button>
+              {/* <WistiaPlayer videoId="7zmqux232b" wrapper="wistia-player-container-1" /> */}
+              {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>คลิปสอนใช้งาน</button>
+                <dialog id="my_modal_3" className="modal">
+                  <div className="modal-box h-[600px] flex justify-center">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <WistiaPlayer videoId="7zmqux232b" wrapper="wistia-player-container-1" />
+                  </div>
+                </dialog>
+                {/* You can open the modal using document.getElementById('ID').showModal() method */}
             </div>
           </div>
         </div>
@@ -170,7 +205,7 @@ function export_page() {
             <div className="divider">⬇️</div> 
             <div className="grid h-[100px] card bg-base-300 rounded-box place-items-center p-[10px]">
               Video สอนใช้งาน
-              <button className='btn bg-primary w-[150px]'>Click to learn</button>
+              <button className='btn bg-primary w-[150px]' onClick={()=>document.getElementById('my_modal_3').showModal()}>คลิปสอนใช้งาน</button>
             </div>
           </div>
         </div>

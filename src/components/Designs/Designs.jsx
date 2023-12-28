@@ -366,7 +366,7 @@ function Designs() {
     });
   };
 
-  //get widget data from save
+  //get widget data from save and set default
   useEffect(() => {
     const DataWidget = window.localStorage.getItem("DataWidget");
     const DataWidget_ = JSON.parse(DataWidget);
