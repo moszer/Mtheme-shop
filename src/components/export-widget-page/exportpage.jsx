@@ -124,17 +124,6 @@ function export_page() {
     }
   };
 
-  const showVideo = () => {
-    const videoHtml = ReactDOMServer.renderToString(
-      <WistiaPlayer videoId="7zmqux232b" wrapper="wistia-player-container-1" />
-    );
-    Swal.fire({
-      html:  videoHtml,
-      showCloseButton: true,
-      showConfirmButton: false,
-    });
-  }
-
     //theme change update
     useEffect(() => {
       const theme_change = window.localStorage.getItem("selectedTheme");

@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { saveAs } from 'file-saver';
 
 export default function convertToscriptable() {
 
@@ -256,44 +256,17 @@ export default function convertToscriptable() {
     widget.presentMedium()
     `;
 
+    //create  downloader 
 
-    // Create a Blob with the data
-    const blob = new Blob([data], { type: 'application/javascript' });
-
-    // Create a download link
-    const downloadLink = document.createElement('a');
-    downloadLink.href = URL.createObjectURL(blob);
-    let id_file = Math.floor(Math.random() * 9999); //random id
-    downloadLink.download = `MTHEM_${id_file}.js`;
-
-    // Append the link to the document
-    document.body.appendChild(downloadLink);
-
-    // Trigger a click on the link to start the download
-    // Trigger a click on the link to start the download
-    downloadLink.click();
-
-    // Remove the link from the document after a delay
-    setTimeout(() => {
-        document.body.removeChild(downloadLink);
-
-        // Check if the file is still being downloaded
-        if (downloadLink.parentNode) {
-            console.error('Download failed or was blocked by the browser.');
-        } else {
-            console.log('Download successful.');
-            toast('🤖 Downloading...', {
-                position: "top-right",
-                autoClose: 1000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                });
-        }
-    }, 1000); // Adjust the delay as needed
-
-    console.log(data)
+    const downloadFile = () => {
+        // Create a Blob containing the file data
+        const blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+    
+        // Use FileSaver.js to save the Blob as a file\
+        let id_file = Math.floor(Math.random() * 9999); //random id
+        let filename = `MTHEM_${id_file}.js`
+        saveAs(blob, filename);
+      };
+    
+      downloadFile()
 }
