@@ -149,6 +149,7 @@ function App() {
         text: "Purchase fail",
         icon: "error",
         confirmButtonText: "OK",
+        customClass: "bg-base-200",
         allowOutsideClick: false, // Set this option to prevent tapping to exit
       }).then((result) => {
         // Check if the user clicked the "OK" button
@@ -165,6 +166,8 @@ function App() {
     document.querySelector("html").setAttribute("data-theme", "luxury");
     document.querySelector("html").setAttribute("data-theme", theme_change);
   }, []); // Empty dependency array ensures the effect runs once after the component mounts
+  
+
   
 
   return (

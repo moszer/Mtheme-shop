@@ -1,7 +1,8 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Carousel_noblackground from "../carousel/carousel_noblackground";
-import { Purchase } from "../../Controller";
-import { useEffect } from "react";
+import { Purchase, checkToken, getDataProducts } from "../../Controller";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const includedFeatures = [
   "Generate with ID: สร้างตารางเรียนด้วยรหัสนักศึกษา",
@@ -12,17 +13,82 @@ const includedFeatures = [
 ];
 
 export default function Example() {
+
+  const [stateLogin, setstateLogin] = useState(false)
+  const [dataproducts, setdataproducts] = useState(null)
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
+    const name = window.localStorage.getItem("name")
+    checkToken(token).then((response) => {
+      console.log("checktoken: ", response);
+      if (response.data === "Have a token") {
+        setstateLogin(true);
+      }
+    });
+      getDataProducts(name, token).then((response) => {
+        const tryForFreeProduct = response.data.products.find(product => product.productName === "TRYFORFREE");
+        const PurchaseProduct = response.data.products.find(product => product.productName === "PURCHASED");
+  
+        //check token invalid
+  
+        if (tryForFreeProduct) {
+          
+          setdataproducts(tryForFreeProduct)
+  
+        } else {
+          console.log("Product with productName 'TRYFORFREE' not found.");
+        }
+  
+        if (PurchaseProduct) {
+  
+          setdataproducts(PurchaseProduct)
+  
+        } else {
+          console.log("Product with productName 'PURCHASED' not found.");
+        }
+  
+      }) .catch(() => {
+  
+        console.log("no data in db")
+        if(stateLogin){
+          alert_try_purchase()
+        }
+      })
+  }, [stateLogin]);
+
+
+  //checkout
   const handleCheckout = async () => {
     try {
-      const token = window.localStorage.getItem("token");
-      const currentUrl = window.location.href;
-      Purchase(1, currentUrl, token).then((response) => {
-        window.location.href = response.data.url; // Redirect to the Stripe checkout page
-      });
+        const token = window.localStorage.getItem("token");
+        const currentUrl = window.location.href;
+      if(stateLogin && dataproducts === null){
+        Purchase(1, currentUrl, token).then((response) => {
+          window.location.href = response.data.url; // Redirect to the Stripe checkout page
+        });
+      } else if(!stateLogin) {
+        Swal.fire({
+          title: "ERROR",
+          text: "[ โปรดล็อกอินก่อนชำระเงิน ]",
+          confirmButtonText: "OK",
+          customClass: "bg-base-200",
+          icon: "error"
+        });
+      } else if(dataproducts !== null){
+        Swal.fire({
+          title: "SUCCESS",
+          text: "[ ชำระเงินแล้ว ]",
+          confirmButtonText: "OK",
+          customClass: "bg-base-200",
+          icon: "success"
+        });
+      }
     } catch (error) {
       console.error("Error creating checkout session:", error);
     }
   };
+
 
   return (
     <div className="bg-base-200 py-24 sm:py-32">
