@@ -5,8 +5,6 @@ import Carousel from "./components/carousel/carousel.jsx";
 import Card from "./components/card/card.jsx";
 import Stats from "./components/stats/stats.jsx";
 import Navigation from "./components/navigation/Navigation.jsx";
-import { useRecoilState } from "recoil";
-import State from "./State.js";
 import Lottie from "lottie-react";
 import catLoaing from "/src/assets/Animation - 1702732952547.json";
 import Sorry_warnning from "/src/assets/Warnning - 1702748099772.json";
@@ -14,26 +12,55 @@ import { browserName } from "react-device-detect";
 
 import Swal from "sweetalert2";
 import { Tryproducts, setProducts } from "./Controller.js";
+import { useRecoilState } from "recoil";
+import State from "./State.js";
 
 function App() {
-  const [isLoading, setisLoading] = useRecoilState(State);
 
   useEffect(() => {
     document.getElementById("my_modal_3").showModal();
   }, []);
 
-  useEffect(() => {
-    if (isLoading.loadingState > 7) {
-      setisLoading({
-        ...isLoading,
-        loadingState: 7,
-      });
-    }
-    if (isLoading.loadingState === 7) {
-      document.getElementById("my_modal_3").close();
-    }
-  }, [isLoading]);
 
+  //check image loading
+  const [isLoadingState, setIsloadingState] = useRecoilState(State)
+  useEffect(() => {
+     setIsloadingState({
+      ...isLoadingState,
+      loadingState: isLoadingState.loadingState
+     })
+  }, [isLoadingState.loadingState])
+
+
+  //check loading state of website
+  const [isLoading_, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkLoadingState = () => {
+      setIsLoading(document.readyState !== 'complete');
+    };
+
+    // Initial check
+    checkLoadingState();
+
+    // Add event listeners to track changes in loading state
+    document.addEventListener('readystatechange', checkLoadingState);
+
+    // Clean up event listeners when the component is unmounted
+    return () => {
+      document.removeEventListener('readystatechange', checkLoadingState);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    if(!isLoading_){
+      document.getElementById("my_modal_3").close();
+      console.log("Browser is loaded")
+    }
+  }, [isLoading_]);
+
+  //check browser support
   useEffect(() => {
     const checkExternal = () => {
       if (
@@ -138,6 +165,7 @@ function App() {
     document.querySelector("html").setAttribute("data-theme", "luxury");
     document.querySelector("html").setAttribute("data-theme", theme_change);
   }, []); // Empty dependency array ensures the effect runs once after the component mounts
+  
 
   return (
     <div>
@@ -181,7 +209,7 @@ function App() {
           </div>
           {
             <p className="flex justify-center">
-              loading... {isLoading.loadingState}
+              loading... {isLoadingState.loadingState}
             </p>
           }
         </div>

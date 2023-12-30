@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import State from '../../State';
 
@@ -10,14 +10,20 @@ const carouselItemStyle = {
 
 function Carousel() {
 
-  const [isLoading, setIsLoading] = useRecoilState(State)
-
+  const [isLoadingState, setIsloadingState] = useRecoilState(State)
   const handleLoad = () => {
-    setIsLoading({
-      ...isLoading,
-      loadingState: isLoading.loadingState + 1
-    });
-  };
+    setIsloadingState({
+      ...isLoadingState,
+      loadingState: isLoadingState.loadingState + 1
+    })
+   };
+
+  useEffect(() => {
+     setIsloadingState({
+      ...isLoadingState,
+      loadingState: isLoadingState.loadingState
+     })
+  }, [isLoadingState.loadingState])
 
   return (
     <div className='flex justify-center'>

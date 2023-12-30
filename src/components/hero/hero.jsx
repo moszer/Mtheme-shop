@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "/src/App.css"
 import { useRecoilState } from 'recoil';
 import State from '../../State';
@@ -7,13 +7,21 @@ import BackGround from '/src/assets/BackGround.json'
 import Lottie from "lottie-react";
 
 function Hero() {
-  const [isLoading, setIsLoading] = useRecoilState(State)
+
+  const [isLoadingState, setIsloadingState] = useRecoilState(State)
   const handleLoad = () => {
-    setIsLoading({
-      ...isLoading,
-      loadingState: isLoading.loadingState + 1
-    });
-  };
+    setIsloadingState({
+      ...isLoadingState,
+      loadingState: isLoadingState.loadingState + 1
+    })
+   };
+
+  useEffect(() => {
+     setIsloadingState({
+      ...isLoadingState,
+      loadingState: isLoadingState.loadingState
+     })
+  }, [isLoadingState.loadingState])
 
   return (
     <div className="hero min-h-screen bg-base-200 relative overflow-hidden">
@@ -25,7 +33,7 @@ function Hero() {
       >
         <Lottie animationData={BackGround} loop={true}/>
       </div>
-
+      
       <div className="hero-content flex-col lg:flex-row relative">
         <img
           src="https://iili.io/JRksD22.md.png"

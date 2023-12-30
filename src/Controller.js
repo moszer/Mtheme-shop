@@ -1,6 +1,4 @@
 import axios from "axios";
-import React, { useEffect } from 'react';
-
 
 export function Register(user) {
     const Username_pass = {
