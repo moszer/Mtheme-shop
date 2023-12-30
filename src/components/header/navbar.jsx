@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { checkToken, getDataProducts } from "../../Controller";
 
 import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
   Link,
-  useNavigate,
 } from "react-router-dom";
 
 function navbar() {
@@ -69,12 +65,14 @@ function navbar() {
     window.location.reload();
   };
 
+  const username_of_show = (name ?? "").substring(0, 4);
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">MTHEME</a>
       </div>
-      <div>{name ? <p>{name}</p> : <p></p>}</div>
+      <div>{name ? <p>{username_of_show}...</p> : <p></p>}</div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
