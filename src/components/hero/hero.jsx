@@ -33,7 +33,7 @@ function Hero() {
       >
         <Lottie animationData={BackGround} loop={true}/>
       </div>
-      
+
       <div className="hero-content flex-col lg:flex-row relative">
         <img
           src="https://iili.io/JRksD22.md.png"
