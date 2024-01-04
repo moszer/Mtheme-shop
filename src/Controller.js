@@ -128,7 +128,7 @@ export function Getschedule(username, password) {
     // Set up the axios request configuration
     var config = {
         method: 'post',
-        url: 'https://api-table-rmutt.onrender.com/schedule',
+        url: 'https://dull-blue-dog-hem.cyclic.app/schedule',
         headers: {
             'Content-Type': 'application/json'
         },
