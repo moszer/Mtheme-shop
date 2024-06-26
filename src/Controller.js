@@ -6,7 +6,7 @@ export function Register(user) {
         "username": user.username,
         "passwords": user.passwords
     }
-    return axios.post("https://wicked-teal-termite.cyclic.app/register", Username_pass)
+    return axios.post("https://register-register-mtheme.onrender.com/register", Username_pass)
 }
 
 //update
@@ -16,7 +16,7 @@ export function Login(user) {
         "username": user.username,
         "passwords": user.passwords
     }
-    return axios.post("https://wicked-teal-termite.cyclic.app/Login", Username_pass)
+    return axios.post("https://register-register-mtheme.onrender.com/Login", Username_pass)
 }
 
 export function checkToken(token) {
@@ -25,7 +25,7 @@ export function checkToken(token) {
 
     var config = {
     method: 'post',
-    url: 'https://wicked-teal-termite.cyclic.app/checkToken',
+    url: 'https://register-register-mtheme.onrender.com/checkToken',
     headers: { 
         'authtoken': token
     },
@@ -44,7 +44,7 @@ export function setProducts(productId, productName ,quantity ,price, username, t
 
     var config = {
     method: 'post',
-    url: 'https://wicked-teal-termite.cyclic.app/products',
+    url: 'https://register-register-mtheme.onrender.com/products',
     headers: { 
         'authtoken': token,
         'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export function getDataProducts(data, token) {
     var data = JSON.stringify({"username": data});
     var config = {
     method: 'post',
-    url: 'https://wicked-teal-termite.cyclic.app/getproducts',
+    url: 'https://register-register-mtheme.onrender.com/getproducts',
     headers: { 
         'authtoken': token,
         'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export function Purchase(quantity, domain , token) {
 
     var config = {
       method: 'post',
-      url: 'https://wicked-teal-termite.cyclic.app/create-checkout-session',
+      url: 'https://register-register-mtheme.onrender.com/create-checkout-session',
       headers: { 
         'authtoken': token,
         'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ export function Tryproducts(name, days , token) {
 
     var config = {
       method: 'post',
-      url: 'https://wicked-teal-termite.cyclic.app/tryproducts',
+      url: 'https://register-register-mtheme.onrender.com/tryproducts',
       headers: { 
         'authtoken': token,
         'Content-Type': 'application/json'
