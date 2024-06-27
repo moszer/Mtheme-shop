@@ -91,11 +91,17 @@ export default function convertToscriptable() {
     request.body = JSON.stringify(requestBody);
 
     // Send the request and handle the response
-    const response = await request.load();
-    if (response) {
+    let response = await request.load();
+    if(response){
     
-    const data = response.toRawString()
-    const scheduleData = JSON.parse(data);
+    let data = response.toRawString()
+    let scheduleData;
+    
+    if(data){
+        scheduleData = JSON.parse(data);
+    } else {
+        scheduleData = "";
+    }
     
     const Monday_ = scheduleData.Day_2
     const Tuesday_ = scheduleData.Day_3
